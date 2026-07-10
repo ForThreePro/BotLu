@@ -7,7 +7,7 @@ import fetch from 'node-fetch'
 import axios from 'axios'
 
 global.owner = [
-  [ '584226480049', 'Barboza OFC 🌃', true ],
+  [ '51936994155', 'Barboza OFC 🌃', true ],
   [ '573155227977', 'Jota 🐼', true ]
 ]
 
@@ -27,7 +27,7 @@ global.listo = '*𝘼𝙦𝙪𝙞 𝙩𝙞𝙚𝙣𝙚 ฅ^•ﻌ•^ฅ*'
 global.namechannel = '𝙉𝙤𝙭 𝘽ο𝙩 𝙈𝘿 🌃'
 global.channel = 'https://whatsapp.com/channel/0029Vaua0ZD3gvWjQaIpSy18'
 
-global.catalogo = fs.readFileSync('./storage/img/catalogo.png')
+global.rayo = fs.readFileSync('./storage/img/rayo.jpg')
 
 global.group = 'https://chat.whatsapp.com/CBuLXuVZcg9FEfCSHiY6b0'
 global.canal = 'https://whatsapp.com/channel/0029Vaua0ZD3gvWjQaIpSy18'
