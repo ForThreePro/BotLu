@@ -1,50 +1,75 @@
-import { WAMessageStubType } from '@whiskeysockets/baileys'
+import chalk from 'chalk'
+import fetch from 'node-fetch'
+import ws from 'ws'
+let WAMessageStubType = (await import('@whiskeysockets/baileys')).default
+import { readdirSync, unlinkSync, existsSync, promises as fs, rmSync} from 'fs'
+import path from 'path'
 
-export async function before(m, { conn, groupMetadata }) {
-  try {
+let handler = m => m
+handler.before = async function (m, { conn, participants, groupMetadata}) {
     if (!m.messageStubType ||!m.isGroup) return
 
-    const chat = global.db?.data?.chats?.[m.chat]
-    if (!chat?.detector) return
-
-    const userJid = m.messageStubParameters?.[0] || m.participant || m.sender
-    if (!userJid) return
-
-    const user = `@${userJid.split('@')[0]}`
-    const group = groupMetadata?.subject || 'este grupo'
-    const img = 'https://files.evogb.win/91Vvmc.jpg'
-
-    let txt = ''
-    switch (m.messageStubType) {
-      case WAMessageStubType.GROUP_PARTICIPANT_ADD:
-        txt = `⛈️ *RAYO PREM DETECTOR* ⚡\n\n🌩️ ${user} se unió a *${group}*`; break
-      case WAMessageStubType.GROUP_PARTICIPANT_LEAVE:
-        txt = `⛈️ *RAYO PREM DETECTOR* ⚡\n\n💨 ${user} salió de *${group}*`; break
-      case WAMessageStubType.GROUP_PARTICIPANT_REMOVE:
-        txt = `⛈️ *RAYO PREM DETECTOR* ⚡\n\n🚮 ${user} fue expulsado de *${group}*`; break
-      case WAMessageStubType.GROUP_PARTICIPANT_ADD_ADMIN:
-        txt = `⛈️ *RAYO PREM DETECTOR* ⚡\n\n👑 ${user} ahora es *ADMIN*`; break
-      case WAMessageStubType.GROUP_PARTICIPANT_REMOVE_ADMIN:
-        txt = `⛈️ *RAYO PREM DETECTOR* ⚡\n\n📉 ${user} ya no es *ADMIN*`; break
-      case WAMessageStubType.GROUP_CHANGE_SUBJECT:
-        txt = `⛈️ *RAYO PREM DETECTOR* ⚡\n\n📝 *Nombre cambiado* a: ${m.messageStubParameters?.[0]}`; break
-      case WAMessageStubType.GROUP_CHANGE_DESCRIPTION:
-        txt = `⛈️ *RAYO PREM DETECTOR* ⚡\n\n📜 *Descripción cambiada*`; break
-      case WAMessageStubType.GROUP_CHANGE_ICON:
-        txt = `⛈️ *RAYO PREM DETECTOR* ⚡\n\n🖼️ *Foto del grupo cambiada*`; break
-    }
-
-    if (txt) {
-      await conn.sendMessage(m.chat, {
-        image: { url: img },
-        caption: txt,
-        mentions: [userJid]
-      })
-    }
-
-  } catch (e) {
-    console.log("Error Detector:", e)
-  }
+    const fkontak = {
+        key: {
+            participants: "0@s.whatsapp.net",
+            remoteJid: "status@broadcast",
+            fromMe: false,
+            id: "KingMenu"
+},
+        message: {
+            locationMessage: {
+                name: "*For Three Bot*",
+                jpegThumbnail: await (await fetch('https://raw.githubusercontent.com/bandidope/Fotos/refs/heads/master/fotos/logo.png')).buffer(),
+                vcard:
+                    "BEGIN:VCARD\n" +
+                    "VERSION:3.0\n" +
+                    "N:;For Three;;;\n" +
+                    "FN:For Three Bot\n" +
+                    "ORG: Whois Developers\n" +
+                    "TITLE:\n" +
+                    "item1.TEL;waid=51936994155:+51 936 994 155\n" +
+                    "item1.X-ABLabel:King\n" +
+                    "X-WA-BIZ-DESCRIPTION:👑 El sistema definitivo.\n" +
+                    "X-WA-BIZ-NAME:The King's Bot\n" +
+                    "END:VCARD"
+}
+},
+        participant: "0@s.whatsapp.net"
 }
 
-export default function(){}
+    let chat = global.db.data.chats[m.chat]
+    let usuario = `@${m.sender.split`@`[0]}`
+    let pp = await conn.profilePictureUrl(m.chat, 'image').catch(_ => null) || 'https://raw.githubusercontent.com/bandidope/Fotos/refs/heads/master/fotos/logo.png'
+
+    let nombre = `> ✨ ${usuario} *ha cambiado el nombre del grupo* ✨\n\n> 📝 *Nuevo nombre:* _${m.messageStubParameters[0]}_`
+    let foto = `> 📸 *¡Nueva foto de grupo!* 📸\n\n> 💫 Acción realizada por: ${usuario}`
+    let edit = `> ⚙️ ${usuario} ha ajustado la configuración del grupo.\n\n> 🔒 Ahora *${m.messageStubParameters[0] == 'on'? 'solo los administradores': 'todos'}* pueden configurar el grupo.`
+    let newlink = `> 🔗 *¡El enlace del grupo ha sido restablecido!* 🔗\n\n> 💫 Acción realizada por: ${usuario}`
+    let status = `> 🗣️ El grupo ha sido *${m.messageStubParameters[0] == 'on'? 'cerrado': 'abierto'}* por ${usuario}!\n\n> 💬 Ahora *${m.messageStubParameters[0] == 'on'? 'solo los administradores': 'todos'}* pueden enviar mensajes.`
+    let admingp = `> 👑 @${m.messageStubParameters[0].split`@`[0]} *¡Ahora es administrador del grupo!* 👑\n\n> 💫 Acción realizada por: ${usuario}`
+    let noadmingp = `🗑️ @${m.messageStubParameters[0].split`@`[0]} *ha dejado de ser administrador del grupo.* 🗑️\n\n> 💫 Acción realizada por: ${usuario}`
+
+    if (chat.detect && m.messageStubType == 21) {
+        await this.sendMessage(m.chat, { text: nombre, mentions: [m.sender]}, { quoted: fkontak})
+} else if (chat.detect && m.messageStubType == 22) {
+        await this.sendMessage(m.chat, { image: { url: pp}, caption: foto, mentions: [m.sender]}, { quoted: fkontak})
+} else if (chat.detect && m.messageStubType == 23) {
+        await this.sendMessage(m.chat, { text: newlink, mentions: [m.sender]}, { quoted: fkontak})
+} else if (chat.detect && m.messageStubType == 25) {
+        await this.sendMessage(m.chat, { text: edit, mentions: [m.sender]}, { quoted: fkontak})
+} else if (chat.detect && m.messageStubType == 26) {
+        await this.sendMessage(m.chat, { text: status, mentions: [m.sender]}, { quoted: fkontak})
+} else if (chat.detect && m.messageStubType == 29) {
+        await this.sendMessage(m.chat, { text: admingp, mentions: [`${m.sender}`,`${m.messageStubParameters[0]}`]}, { quoted: fkontak})
+} else if (chat.detect && m.messageStubType == 30) {
+await this.sendMessage(m.chat, { text: noadmingp, mentions: [`${m.sender}`,`${m.messageStubParameters[0]}`]}, { quoted: fkontak})
+} else {
+        console.log({
+            messageStubType: m.messageStubType,
+            messageStubParameters: m.messageStubParameters,
+            type: WAMessageStubType[m.messageStubType],
+})
+}
+}
+
+export default handler
