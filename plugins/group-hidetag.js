@@ -22,13 +22,12 @@ let handler = async (m, { conn, text, participants }) => {
   let groupMeta = await conn.groupMetadata(m.chat).catch(() => null)
   let groupName = groupMeta?.subject || "Grupo"
 
-  // Watermark personalizado con nombre del grupo en estilo pequeño
-  // Puedes usar subscript o small caps para simular letra pequeña
-  let watermark = `\n\n> 🛸 *[ BOX BOT MD ]* 🌌`
+  // Watermark RAYO PREM
+  let watermark = `\n\n⛈️ *RAYO PREM* | *${groupName}* 🌙\n⚡ *Team Nightwish*`
 
   // Construir el texto final según origen
   let baseText = text || q.text || c || ''
-  let finalText = isFromBot ? baseText : baseText + watermark
+  let finalText = isFromBot ? baseText : `⛈️ *RAYO PREM AVISO* 🌙\n\n${baseText}${watermark}` // Cambiado
 
   const msg = conn.cMod(
     m.chat,
@@ -47,7 +46,7 @@ let handler = async (m, { conn, text, participants }) => {
   await conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id })
 }
 
-handler.help = ['notify']
+handler.help = ['hidetag <texto>']
 handler.tags = ['grupos']
 handler.command = /^(hidetag|notify|notificar|notifi|noti|n|hidet|aviso)$/i
 handler.group = true
