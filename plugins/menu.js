@@ -11,16 +11,16 @@ let handler = async (m, { conn, usedPrefix }) => {
 ╭─〔 *Team Nightwish* 〕─╮
 │ 👤 *Usuario:* @${taguser.split('@')[0]}
 │ ⚙️ *Prefijo:* [ ${usedPrefix} ]
-│ 🌙 *Hora:* ${new Date().toLocaleTimeString('es-PE')}
+│ 🌙 *Hora:* ${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' })}
 ╰──────────────────────╯
 `
 
   let help = Object.values(global.plugins).filter(p => p.help &&!p.disabled)
-  let groups = {}
+  let groups = {} // <- aquí va objeto por categoría
 
   for (let plugin of help) {
     let category = plugin.tags? plugin.tags[0] : 'otros'
-    if (!groups) groups = []
+    if (!groups) groups = [] // <- crear array si no existe
 
     if (Array.isArray(plugin.help)) {
       groups.push(...plugin.help)
