@@ -1,21 +1,19 @@
 import { WAMessageStubType } from '@whiskeysockets/baileys'
-import { readFileSync } from 'fs'
-import { join } from 'path'
 
 const handler = async (m, { conn, args, isAdmin, isOwner }) => {
-  if (!isAdmin &&!isOwner) throw "⛈️ *RAYO PREM ERROR* ➔ *Solo los administradores pueden usar este comando.*" // Cambiado
+  if (!isAdmin &&!isOwner) throw "⛈️ *RAYO PREM ERROR* ➔ *Solo los administradores pueden usar este comando.*"
 
   let chat = global.db.data.chats[m.chat]
   if (!chat) global.db.data.chats[m.chat] = {}
 
   if (/on/i.test(args[0])) {
     chat.bienvenida = true
-    await conn.reply(m.chat, "⛈️ *RAYO PREM BIENVENIDA* 🌙\n\n⚡ *Sistema de bienvenida ACTIVADO* en este grupo.", m) // Cambiado
+    await conn.reply(m.chat, "⛈️ *RAYO PREM BIENVENIDA* 🌙\n\n⚡ *Sistema de bienvenida ACTIVADO* en este grupo.", m)
   } else if (/off/i.test(args[0])) {
     chat.bienvenida = false
-    await conn.reply(m.chat, "⛈️ *RAYO PREM BIENVENIDA* 🌙\n\n❌ *Sistema de bienvenida DESACTIVADO*.", m) // Cambiado
+    await conn.reply(m.chat, "⛈️ *RAYO PREM BIENVENIDA* 🌙\n\n❌ *Sistema de bienvenida DESACTIVADO*.", m)
   } else {
-    await conn.reply(m.chat, "⛈️ *RAYO PREM BIENVENIDA* 🌙\n\n📌 *Uso:* *.bienvenida on* / *.bienvenida off*\n🌩️ *Team Nightwish*", m) // Cambiado
+    await conn.reply(m.chat, "⛈️ *RAYO PREM BIENVENIDA* 🌙\n\n📌 *Uso:* *.bienvenida on* / *.bienvenida off*\n🌩️ *Team Nightwish*", m)
   }
 }
 
@@ -25,20 +23,21 @@ handler.command = /^(bienvenida|welcome|bye)$/i
 
 handler.before = async function (m, { conn, groupMetadata }) {
   try {
-    if (!m.messageStubType ||!m.isGroup) return!0
+    if (!m.messageStubType ||!m.isGroup) return true
 
     const chat = global.db?.data?.chats?.[m.chat]
-    if (!chat ||!chat.bienvenida) return!0
-
-    let img
-    try {
-      img = readFileSync(join(process.cwd(), 'storage', 'img', 'catalogo.png'))
-    } catch {
-      img = { url: 'https://files.catbox.moe/1j784p.jpg' }
-    }
+    if (!chat ||!chat.bienvenida) return true
 
     const userJid = m.messageStubParameters?.[0] || m.participant
-    if (!userJid) return!0
+    if (!userJid) return true
+
+    // NUEVO: Detectar foto del usuario. Si falla usa tu link
+    let img
+    try {
+      img = await conn.profilePictureUrl(userJid, 'image')
+    } catch {
+      img = 'https://files.evogb.win/91Vvmc.jpg' // Fallback
+    }
 
     const userTag = `@${userJid.split('@')[0]}`
     const groupName = groupMetadata.subject
@@ -81,7 +80,7 @@ handler.before = async function (m, { conn, groupMetadata }) {
 
     if (txt) {
       await conn.sendMessage(m.chat, {
-        image: typeof img === 'string'? { url: img } : img,
+        image: { url: img },
         caption: txt,
         mentions: [userJid]
       })
@@ -90,7 +89,7 @@ handler.before = async function (m, { conn, groupMetadata }) {
   } catch (e) {
     console.error("Error en Bienvenida RAYO:", e)
   }
-  return!0
+  return true
 }
 
 export default handler
