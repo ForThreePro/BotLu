@@ -1,20 +1,21 @@
 const handler = async (m, { conn, text, command, isAdmin, isOwner }) => {
     if (!m.isGroup || (!isAdmin &&!isOwner)) {
-        return m.reply('❌ ¡Solo los administradores o el dueño pueden usar estos comandos!');
+        return m.reply('⛈️ *RAYO PREM* ⚡\n\n❌ *¡ACCESO DENEGADO!*\nSolo los admins o el dueño pueden invocar este trueno.');
     }
 
-    let chat = global.db.data.chats[m.chat]??= {}
+    let chat = global.db.data.chats[m.chat]
+    if (!chat) global.db.data.chats[m.chat] = {}
+    chat = global.db.data.chats[m.chat]
 
     if (command === 'setwelcome') {
-        if (!text) return m.reply('❌ Por favor, proporciona un mensaje.\n*Placeholders:* `@user` `@group` `@count` `@desc`\n\n*Ejemplo:* .setwelcome Bienvenido @user a @group. Eres el miembro #@count');
+        if (!text) return m.reply(`🌩️ *RAYO PREM SETWELCOME* ⚡\n\n❌ *¡FALTA EL MENSAJE!*\n\n📝 *Placeholders:*\n@user = Mención\n@group = Grupo\n@count = Miembros\n@desc = Descripción\n💡 *Ejemplo:*\n.setwelcome ⛈️ @user invocó el trueno ⚡\n🌩️ Bienvenido a @group\n👥 Eres el guerrero #@count`);
         chat.customWelcome = text.trim();
-
-        return m.reply(`✅ *Bienvenida personalizada establecida*\n\n\`\`${text.trim()}\`\n\nPara quitarla usa: .delwelcome`);
-
-    } else if (command === 'delwelcome') {
-        if (!chat.customWelcome) return m.reply('⚠️ No tienes una bienvenida editada.');
+        return m.reply(`⛈️ *RAYO PREM* ⚡\n\n✅ *¡BIENVENIDA GUARDADA!*\n\n📝 *Vista previa:*\n\`\`${text.trim()}\`\n\n🗑️ *Para borrar:* .delwelcome`);
+    }
+    if (command === 'delwelcome') {
+        if (!chat.customWelcome) return m.reply('🌩️ *RAYO PREM* ⚡\n\n⚠️ *No tienes una bienvenida editada.*');
         delete chat.customWelcome;
-        return m.reply('✅ *Listo*\n\nSe eliminó la bienvenida personalizada. Ahora se usa la de `welcome.js`.');
+        return m.reply('⛈️ *RAYO PREM* ⚡\n\n✅ *¡LISTO!*\n\n🗑️ Se eliminó la bienvenida personalizada.\n⚡ Ahora se usa la de `welcome.js`');
     }
 };
 handler.help = ['setwelcome <mensaje>', 'delwelcome'];
