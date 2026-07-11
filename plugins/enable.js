@@ -66,7 +66,7 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isR
   if (fail) return
 
   // IMAGEN LOCAL lu.jpg
-  const pathImg = join(process.cwd(), 'storage', 'img', 'lu.jpg')
+  const pathImg = join(process.cwd(), 'storage', 'img', 'rayo.jpg')
   let luImg = existsSync(pathImg)? readFileSync(pathImg) : null
 
   let estadoTexto = isEnable? 'Activado 🐾' : 'Desactivado 😿'
