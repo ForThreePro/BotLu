@@ -1,31 +1,138 @@
 import axios from 'axios'
 import fetch from "node-fetch"
+import yts from 'yt-search'
 
 let handler = async (m, { conn, text, command, usedPrefix }) => {
     if (!text) return conn.reply(m.chat, `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
-│ ⛈️ *DESCARGADOR SOCIAL*
+│ ⛈️ *CENTRAL DE DESCARGAS*
 │
-│ ⚡ *Uso:*.${command} [link]
+│ ⚡ *Comandos:*
+│ 🌙 *.play* nombre = Audio YT
+│ 🌙 *.play2* nombre = Video YT
+│ 🌙 *.spotify* nombre = Audio SP
+│ 🌙 *.tiktok* link = Video TT
+│ 🌙 *.tiktoksearch* texto = Buscar TT
+│ 🌙 *.ig* link = Instagram
+│ 🌙 *.fb* link = Facebook
+│ 🌙 *.mediafire* link = MediaFire
 │
-│ 🌙 *Soporta:*
-│ 📸 Instagram:.ig link
-│ 📘 Facebook:.fb link
-│ 📦 MediaFire:.mediafire link
-│
-│ > *“Descarga el poder del trueno”*
+│ > *“Descarga el trueno nocturno”*
 ╰─────────────────❒`, m)
 
     await m.react('⏳')
+    const keyEvo = Buffer.from('ZWt1c2Fz', 'base64').toString('utf-8').split('').reverse().join('')
+    const keySasuke = Buffer.from('c2FzdWtl', 'base64').toString('utf-8')
 
     try {
-        const keyEvo = Buffer.from('ZWt1c2Fz', 'base64').toString('utf-8').split('').reverse().join('')
-        const keySasuke = Buffer.from('c2FzdWtl', 'base64').toString('utf-8')
+        // ===== PLAY / PLAY2 YOUTUBE =====
+        if (/^(play|play2)$/i.test(command)) {
+            let res = await yts(text)
+            let vid = res.videos[0]
+            if (!vid) throw 'YT_NOT_FOUND'
+
+            await m.react('🔍')
+            await m.react('⏳')
+
+            let isVideo = command === 'play2'
+            let apiUrl = isVideo
+               ? `https://api.evogb.org/dl/ytmp4?url=${encodeURIComponent(vid.url)}&quality=720&key=${keySasuke}`
+                : `https://api.evogb.org/dl/ytmp3?url=${encodeURIComponent(vid.url)}&key=${keySasuke}`
+
+            let json = await (await fetch(apiUrl)).json()
+            if (!json.status) throw 'YT_DL_ERROR'
+
+            let cap = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ ⚡ *YOUTUBE ${isVideo? 'VIDEO' : 'AUDIO'}*
+│
+│ 📌 *Título:* ${vid.title}
+│ ⏳ *Duración:* ${vid.timestamp}
+│ 👤 *Autor:* ${vid.author.name}
+│ 👁️ *Vistas:* ${vid.views.toLocaleString()}
+│ 📁 *Formato:* ${isVideo? 'MP4 720p' : 'MP3 320kbps'}
+│
+│ > *“Extrayendo del trueno digital”*
+╰─────────────────❒`
+
+            await conn.sendMessage(m.chat, { image: { url: vid.thumbnail }, caption: cap }, { quoted: m })
+            await conn.sendMessage(m.chat, {
+                [isVideo? 'video' : 'audio']: { url: json.data.dl },
+                mimetype: isVideo? 'video/mp4' : 'audio/mpeg',
+                fileName: `${vid.title}.${isVideo? 'mp4' : 'mp3'}`
+            }, { quoted: m })
+            return await m.react('✅')
+        }
+
+        // ===== SPOTIFY =====
+        if (/^(spotify)$/i.test(command)) {
+            let searchRes = await fetch(`https://api.evogb.org/search/spotify?query=${encodeURIComponent(text)}&key=${keySasuke}`)
+            let searchData = await searchRes.json()
+            if (!searchData.status ||!searchData.result[0]) throw 'SP_NOT_FOUND'
+
+            await m.react('🔍')
+            await m.react('⏳')
+
+            let song = searchData.result[0]
+            let dlRes = await fetch(`https://api.evogb.org/dl/spotify?url=${encodeURIComponent(song.link)}&key=${keySasuke}`)
+            let dlData = await dlRes.json()
+            if (!dlData.status) throw 'SP_DL_ERROR'
+
+            let cap = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ 🎵 *SPOTIFY DOWNLOADER*
+│
+│ ⚡ *Título:* ${dlData.data.name}
+│ 👤 *Artista:* ${dlData.data.artist}
+│ 💿 *Álbum:* ${dlData.data.album}
+│ ⏳ *Duración:* ${dlData.data.duration}
+│ 📅 *Año:* ${dlData.data.year}
+│
+│ > *“Música extraída de la tormenta”*
+╰─────────────────❒`
+
+            await conn.sendMessage(m.chat, { image: { url: dlData.data.image }, caption: cap }, { quoted: m })
+            await conn.sendMessage(m.chat, { audio: { url: dlData.data.url }, mimetype: 'audio/mpeg', fileName: `${dlData.data.name}.mp3` }, { quoted: m })
+            return await m.react('✅')
+        }
+
+        // ===== TIKTOK =====
+        if (/^(tiktok|tiktoksearch)$/i.test(command)) {
+            if (command === 'tiktoksearch') {
+                let res = await (await fetch(`https://api.evogb.org/search/tiktok?query=${text}&key=${keySasuke}`)).json()
+                let video = res.data[0]
+                if (!video) throw 'TT_NOT_FOUND'
+
+                let caption = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ ⛈️ *TIKTOK SEARCH*
+│
+│ ⚡ *Título:* ${video.title}
+│ 👤 *Autor:* ${video.author.nickname}
+│ 👁️ *Vistas:* ${video.play_count.toLocaleString()}
+│ ❤️ *Likes:* ${video.digg_count.toLocaleString()}
+│
+│ > *“Video encontrado en la tormenta”*
+╰─────────────────❒`
+                await conn.sendFile(m.chat, video.dl, 'tiktok.mp4', caption, m)
+            } else {
+                let res = await (await fetch(`https://api.evogb.org/dl/tiktok?url=${text}&key=${keySasuke}`)).json()
+                let data = res.data
+                if (!data) throw 'TT_DL_ERROR'
+
+                let caption = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ ⛈️ *TIKTOK DOWNLOADER*
+│
+│ ⚡ *Título:* ${data.title}
+│ 👤 *Autor:* ${data.author.nickname}
+│
+│ > *“Descargado por el rayo nocturno”*
+╰─────────────────❒`
+                await conn.sendFile(m.chat, Array.isArray(data.dl)? data.dl[0] : data.dl, 'tiktok.mp4', caption, m)
+            }
+            return await m.react('✅')
+        }
 
         // ===== INSTAGRAM =====
         if (/^(ig|instagram)$/i.test(command)) {
             const { data } = await axios.get(`https://api.evogb.org/dl/instagram?url=${encodeURIComponent(text)}&key=${keyEvo}`)
-            if (!data.status) throw 'IG'
-
+            if (!data.status) throw 'IG_ERROR'
             let media = data.data[0]
             let type = media.type === 'video'? 'VIDEO' : 'IMAGEN'
 
@@ -34,7 +141,6 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
 │
 │ ⚡ *Tipo:* ${type}
 │ 🌙 *Estado:* Enviando contenido
-│ ⛈️ *Servidor:* evogb.org
 │
 │ > *“Capturado en la tormenta nocturna”*
 ╰─────────────────❒`
@@ -50,8 +156,7 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
         // ===== FACEBOOK =====
         if (/^(fb|facebook)$/i.test(command)) {
             const { data } = await axios.get(`https://api.evogb.org/dl/facebook?url=${encodeURIComponent(text)}&key=${keyEvo}`)
-            if (!data.status) throw 'FB'
-
+            if (!data.status) throw 'FB_ERROR'
             let video = data.resultados[0]
 
             let cap = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
@@ -59,7 +164,6 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
 │
 │ ⚡ *Calidad:* ${video.calidad || 'HD'}
 │ 🌙 *Estado:* Enviando video
-│ ⛈️ *Servidor:* evogb.org
 │
 │ > *“El video fue extraído por el rayo”*
 ╰─────────────────❒`
@@ -76,11 +180,7 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
         if (/^(mediafire|mf|mediafiredl)$/i.test(command)) {
             let response = await fetch(`https://api.evogb.org/dl/mediafire?url=${encodeURIComponent(text)}&key=${keySasuke}`)
             let result = await response.json()
-
-            if (!result.status ||!result.data) {
-                await m.react('⚠️')
-                throw 'MF'
-            }
+            if (!result.status ||!result.data) throw 'MF_ERROR'
 
             let { name, size, date, dl } = result.data
             let caption = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
@@ -89,7 +189,6 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
 │ 🏷 *Nombre:* ${name}
 │ ⚖ *Tamaño:* ${size}
 │ 📅 *Fecha:* ${date}
-│ ⚡ *Estado:* Enviando archivo
 │
 │ > *“Archivo extraído de la nube nocturna”*
 ╰─────────────────❒`
@@ -101,23 +200,28 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
     } catch (e) {
         console.error(e)
         await m.react('❌')
-
-        let errorMsg = '❌ Error al procesar'
-        if (e === 'IG') errorMsg = 'No se pudo descargar el contenido de Instagram'
-        if (e === 'FB') errorMsg = 'No se pudo descargar el video de Facebook'
-        if (e === 'MF') errorMsg = 'No se pudo localizar el archivo de MediaFire'
-
+        let msgs = {
+            YT_NOT_FOUND: 'No se encontraron resultados en YouTube',
+            YT_DL_ERROR: 'Error al procesar la descarga de YouTube',
+            SP_NOT_FOUND: `No se encontraron resultados para: ${text}`,
+            SP_DL_ERROR: 'Error al obtener el enlace de Spotify',
+            TT_NOT_FOUND: 'No se encontraron resultados en TikTok',
+            TT_DL_ERROR: 'No se pudo obtener el video de TikTok',
+            IG_ERROR: 'Error al procesar el enlace de Instagram',
+            FB_ERROR: 'Error al procesar el video de Facebook',
+            MF_ERROR: 'No se pudo localizar el archivo de MediaFire'
+        }
         m.reply(`╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
 │ ⛈️ *ERROR*
 │
-│ ⚡ *${errorMsg}*
-│ 🌙 *Verifica el enlace*
+│ ⚡ *${msgs[e] || 'Error inesperado'}*
+│ 🌙 *Verifica el enlace/búsqueda*
 ╰─────────────────❒`)
     }
 }
 
-handler.help = ['ig <link>', 'fb <link>', 'mediafire <link>']
+handler.help = ['play', 'play2', 'spotify', 'tiktok', 'tiktoksearch', 'ig', 'fb', 'mediafire']
 handler.tags = ['downloader']
-handler.command = /^(ig|instagram|fb|facebook|mediafire|mf|mediafiredl)$/i
+handler.command = /^(play|play2|spotify|tiktok|tiktoksearch|ig|instagram|fb|facebook|mediafire|mf|mediafiredl)$/i
 
 export default handler
