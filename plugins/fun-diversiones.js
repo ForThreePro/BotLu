@@ -8,17 +8,87 @@ let handler = async (m, { conn, command, text }) => {
   let porcentaje = Math.floor(Math.random() * 500) + 1;
 
   let respuestas = {
-    'gay': `⛈️ *RAYO PREM SCANNER* 🌙\n\n⚡ *${userTarget}* *ES 🏳️‍🌈* *${porcentaje}%* *GAY*\n🌩️ *Team Nightwish*`, // Cambiado
-    'lesbiana': `⛈️ *RAYO PREM SCANNER* 🌙\n\n⚡ *${userTarget}* *ES 🏳️‍🌈* *${porcentaje}%* *LESBIANA*\n🌩️ *Team Nightwish*`, // Cambiado
-    'pajero': `⛈️ *RAYO PREM SCANNER* 🌙\n\n⚡ *${userTarget}* *ES 😏💦* *${porcentaje}%* *PAJERO*\n🌩️ *Team Nightwish*`, // Cambiado
-    'pajera': `⛈️ *RAYO PREM SCANNER* 🌙\n\n⚡ *${userTarget}* *ES 😏💦* *${porcentaje}%* *PAJERA*\n🌩️ *Team Nightwish*`, // Cambiado
-    'puto': `⛈️ *RAYO PREM SCANNER* 🌙\n\n⚡ *${userTarget}* *ES* *${porcentaje}%* *PUTO*\n🔥 *MÁS INFORMACIÓN A SU PRIVADO* 🔥🥵\n🌩️ *Team Nightwish*`, // Cambiado
-    'puta': `⛈️ *RAYO PREM SCANNER* 🌙\n\n⚡ *${userTarget}* *ES* *${porcentaje}%* *PUTA*\n🔥 *MÁS INFORMACIÓN A SU PRIVADO* 🔥🥵\n🌩️ *Team Nightwish*`, // Cambiado
-    'manco': `⛈️ *RAYO PREM SCANNER* 🌙\n\n⚡ *${userTarget}* *ES* *${porcentaje}%* *MANCO* 💩\n🌩️ *Team Nightwish*`, // Cambiado
-    'manca': `⛈️ *RAYO PREM SCANNER* 🌙\n\n⚡ *${userTarget}* *ES* *${porcentaje}%* *MANCA* 💩\n🌩️ *Team Nightwish*`, // Cambiado
-    'rata': `⛈️ *RAYO PREM SCANNER* 🌙\n\n⚡ *${userTarget}* *ES* *${porcentaje}%* *RATA* 🐁 *COME QUESO* 🧀\n🌩️ *Team Nightwish*`, // Cambiado
-    'prostituto': `⛈️ *RAYO PREM SCANNER* 🌙\n\n⚡ *${userTarget}* *ES* *${porcentaje}%* *PROSTITUTO* 🫦👅\n❓ *¿QUIÉN QUIERE DE SUS SERVICIOS?*\n🌩️ *Team Nightwish*`, // Cambiado
-    'prostituta': `⛈️ *RAYO PREM SCANNER* 🌙\n\n⚡ *${userTarget}* *ES* *${porcentaje}%* *PROSTITUTA* 🫦👅\n❓ *¿QUIÉN QUIERE DE SUS SERVICIOS?*\n🌩️ *Team Nightwish*` // Cambiado
+    'gay': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🔍 *SCANNER LU*
+│
+│ 😼 *${userTarget}* *ES 🏳️‍🌈* *${porcentaje}%* *GAY*
+│
+│ > *“Lu lo detectó con sus bigotes”* 🐾
+╰─────────────────❒`,
+    'lesbiana': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🔍 *SCANNER LU*
+│
+│ 😼 *${userTarget}* *ES 🏳️‍🌈* *${porcentaje}%* *LESBIANA*
+│
+│ > *“Ronroneo de confirmación”* 🐾
+╰─────────────────❒`,
+    'pajero': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🔍 *SCANNER LU*
+│
+│ 😼 *${userTarget}* *ES 😏💦* *${porcentaje}%* *PAJERO*
+│
+│ > *“Lu no juzga, solo observa”* 🐾
+╰─────────────────❒`,
+    'pajera': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🔍 *SCANNER LU*
+│
+│ 😼 *${userTarget}* *ES 😏💦* *${porcentaje}%* *PAJERA*
+│
+│ > *“Lu lava sus patitas y se va”* 🐾
+╰─────────────────❒`,
+    'puto': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🔍 *SCANNER LU*
+│
+│ 😼 *${userTarget}* *ES* *${porcentaje}%* *PUTO*
+│ 🔥 *MÁS INFO A SU PRIVADO* 🔥🥵
+│
+│ > *“Lu se sonroja”* 🐾
+╰─────────────────❒`,
+    'puta': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🔍 *SCANNER LU*
+│
+│ 😼 *${userTarget}* *ES* *${porcentaje}%* *PUTA*
+│ 🔥 *MÁS INFO A SU PRIVADO* 🔥🥵
+│
+│ > *“Lu se tapa los ojitos”* 🐾
+╰─────────────────❒`,
+    'manco': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🔍 *SCANNER LU*
+│
+│ 😼 *${userTarget}* *ES* *${porcentaje}%* *MANCO* 💩
+│
+│ > *“Ni para cazar ratones sirve”* 🐾
+╰─────────────────❒`,
+    'manca': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🔍 *SCANNER LU*
+│
+│ 😼 *${userTarget}* *ES* *${porcentaje}%* *MANCA* 💩
+│
+│ > *“A practicar con el rascador”* 🐾
+╰─────────────────❒`,
+    'rata': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🔍 *SCANNER LU*
+│
+│ 😼 *${userTarget}* *ES* *${porcentaje}%* *RATA* 🐁 *COME QUESO* 🧀
+│
+│ > *“Cuidado Lu te va a cazar”* 🐾
+╰─────────────────❒`,
+    'prostituto': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🔍 *SCANNER LU*
+│
+│ 😼 *${userTarget}* *ES* *${porcentaje}%* *PROSTITUTO* 🫦👅
+│ ❓ *¿QUIÉN QUIERE SUS SERVICIOS?*
+│
+│ > *“Lu ofrece galletas a cambio”* 🐾
+╰─────────────────❒`,
+    'prostituta': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🔍 *SCANNER LU*
+│
+│ 😼 *${userTarget}* *ES* *${porcentaje}%* *PROSTITUTA* 🫦👅
+│ ❓ *¿QUIÉN QUIERE SUS SERVICIOS?*
+│
+│ > *“Lu cobra en atún”* 🐾
+╰─────────────────❒`
   }
 
   let respuestaFinal = respuestas[command.toLowerCase()];
