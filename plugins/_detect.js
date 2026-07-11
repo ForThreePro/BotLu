@@ -17,115 +17,115 @@ handler.before = async function (m, { conn, groupMetadata }) {
 
     switch (m.messageStubType) {
         case 21: // Cambiar nombre
-            txt = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
-│ 🌙 *REGISTRO DEL GRUPO*
+            txt = `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🐾 *REGISTRO DEL GRUPO*
 │
 │ 📢 *CAMBIO DE NOMBRE*
 │ 👤 *Usuario:* ${usuario}
 │ 📝 *Nuevo:* _${m.messageStubParameters[0]}_
-│ 🌩️ *Grupo:* ${group}
+│ 🏠 *Grupo:* ${group}
 │
-│ > *“El trueno ha renombrado”* ⚡
+│ > *“Lu tomó nota del cambio”* 😼
 ╰─────────────────❒`; break
 
         case 22: // Cambiar foto
-            txt = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
-│ 🌙 *REGISTRO DEL GRUPO*
+            txt = `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🐾 *REGISTRO DEL GRUPO*
 │
 │ 📸 *CAMBIO DE FOTO*
 │ 👤 *Usuario:* ${usuario}
 │ 🖼️ *Nueva imagen establecida*
-│ 🌩️ *Grupo:* ${group}
+│ 🏠 *Grupo:* ${group}
 │
-│ > *“Que brille bajo la noche”* ⚡
+│ > *“Que linda se ve la casita”* 🐱
 ╰─────────────────❒`; break
 
         case 23: // Cambiar link
-            txt = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
-│ ⛈️ *ALERTA DE SEGURIDAD*
+            txt = `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ ⚠️ *ALERTA DE SEGURIDAD*
 │
 │ 🔗 *LINK RESETEADO*
 │ 👤 *Usuario:* ${usuario}
-│ 🌩️ *Grupo:* ${group}
+│ 🏠 *Grupo:* ${group}
 │
-│ > *“El portal ha sido alterado”* ⚡
+│ > *“El portal del grupo cambió”* 🐾
 ╰─────────────────❒`; break
 
         case 25: // Cambiar ajustes
-            txt = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+            txt = `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
 │ 🛡️ *AJUSTES MODIFICADOS*
 │
 │ 👤 *Usuario:* ${usuario}
 │ ⚙️ *Permisos:* ${m.messageStubParameters[0] == 'on'? '*SOLO ADMINS* 🔒' : '*TODOS* 🔓'}
 │ 📊 *Edición de info de grupo*
 │
-│ > *“El control cambió de manos”* ⚡
+│ > *“Lu registró el cambio”* 😼
 ╰─────────────────❒`; break
 
         case 26: // Abrir/Cerrar
-            txt = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
-│ 🌙 *ESTADO DEL CHAT*
+            txt = `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🐾 *ESTADO DEL CHAT*
 │
 │ 👤 *Usuario:* ${usuario}
 │ 🗣️ *Modo:* ${m.messageStubParameters[0] == 'on'? '*SOLO ADMINS* 🔒' : '*TODOS* 🔓'}
 │ 📢 *Grupo:* ${m.messageStubParameters[0] == 'on'? 'CERRADO' : 'ABIERTO'}
 │
-│ > *“Que se escuche el trueno”* ⚡
+│ > *“Lu vigila la puerta”* 🐱
 ╰─────────────────❒`; break
 
         case 29: // Dar admin
-            txt = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
-│ 👑 *ASCENSO DIVINO*
+            txt = `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 👑 *NUEVO ADMIN*
 │
-│ ⚡ *Nuevo Admin:* @${m.messageStubParameters[0].split('@')[0]}
+│ 🐾 *Nuevo Admin:* @${m.messageStubParameters[0].split('@')[0]}
 │ 👤 *Otorgado por:* ${usuario}
-│ 🌙 *Rango:* Administrador
+│ 😼 *Rango:* Administrador
 │
-│ > *“Que gobierne con poder”* ⚡
+│ > *“Que gobierne con sabiduría”* 🐾
 ╰─────────────────❒`; break
 
         case 30: // Quitar admin
-            txt = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
-│ 📉 *DESTITUCIÓN*
+            txt = `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 📉 *ADMIN DESTITUIDO*
 │
 │ 💥 *Admin caído:* @${m.messageStubParameters[0].split('@')[0]}
 │ 👤 *Ejecutado por:* ${usuario}
 │ 🗑️ *Rango removido*
 │
-│ > *“El rayo no perdona”* ⚡
+│ > *“Lu registró la destitución”* 😿
 ╰─────────────────❒`; break
 
         case WAMessageStubType.GROUP_PARTICIPANT_ADD:
-            txt = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
-│ 🌩️ *NUEVO INTEGRANTE*
+            txt = `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🐾 *NUEVO INTEGRANTE*
 │
-│ 🔥 *Bienvenido:* @${m.messageStubParameters[0].split('@')[0]}
-│ 🌙 *Grupo:* ${group}
-│ ⚡ *Estado:* Ingreso registrado
+│ 💖 *Bienvenido:* @${m.messageStubParameters[0].split('@')[0]}
+│ 🏠 *Grupo:* ${group}
+│ 😼 *Estado:* Ingreso registrado
 │
-│ > *“Prepárate para la tormenta”* ⛈️
+│ > *“Ronroneos para el nuevo”* 🐱
 ╰─────────────────❒`; break
 
         case WAMessageStubType.GROUP_PARTICIPANT_LEAVE:
-            txt = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+            txt = `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
 │ 💨 *SALIDA REGISTRADA*
 │
-│ 😔 *Se fue:* @${m.messageStubParameters[0].split('@')[0]}
-│ 🌙 *Grupo:* ${group}
+│ 😿 *Se fue:* @${m.messageStubParameters[0].split('@')[0]}
+│ 🏠 *Grupo:* ${group}
 │ 🌫️ *Estado:* Abandonó el grupo
 │
-│ > *“Que los vientos lo guíen”* ⚡
+│ > *“Lu extrañará sus ronroneos”* 🐾
 ╰─────────────────❒`; break
 
         case WAMessageStubType.GROUP_PARTICIPANT_REMOVE:
-            txt = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
-│ 🚮 *EXPULSIÓN EJECUTADA*
+            txt = `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🗑️ *EXPULSIÓN EJECUTADA*
 │
-│ 💣 *Eliminado:* @${m.messageStubParameters[0].split('@')[0]}
+│ 🚮 *Eliminado:* @${m.messageStubParameters[0].split('@')[0]}
 │ 👤 *Por orden de:* ${usuario}
-│ ⛈️ *Causa:* Violación de reglas
+│ ⚠️ *Causa:* Violación de reglas
 │
-│ > *“El trueno ha juzgado”* ⚡
+│ > *“Lu protegió al grupo”* 😼
 ╰─────────────────❒`; break
     }
 
