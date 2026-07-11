@@ -27,87 +27,78 @@ export async function before(m, { conn }) {
 
     // [DATOS DEL GRUPO]
     const groupName = groupMetadata.subject || 'Mi Grupo';
-    const groupDesc = groupMetadata.desc?.toString() || '📜 No hay descripción';
+    const groupDesc = groupMetadata.desc?.toString() || '📜 Sin descripción';
     const groupMembers = groupMetadata.participants.length;
 
     const fixedImageUrl = 'https://files.evogb.win/FXbFDD.jpg'; // [TU LOGO SOLO SI NO TIENE FOTO]
 
-    // [FIX] 1. INTENTA AGARRAR LA FOTO DEL USER PRIMERO
+    // [FIX] 1. FOTO DEL USER PRIMERO
     let imgBuffer = null;
     try {
       let ppUrl = await conn.profilePictureUrl(userJid, 'image').catch(_ => null);
       if (ppUrl) {
-        imgBuffer = await fetch(ppUrl).then(res => res.buffer()).catch(_ => null); // [SI TIENE FOTO = USA SU FOTO]
+        imgBuffer = await fetch(ppUrl).then(res => res.buffer()).catch(_ => null);
       }
     } catch(e){}
 
-    // [FIX] 2. SI NO TIENE FOTO O FALLÓ, USA TU LOGO
+    // [FIX] 2. SI NO TIENE FOTO = LOGO
     if (!imgBuffer) {
-      imgBuffer = await fetch(fixedImageUrl).then(res => res.buffer()).catch(_ => null); // [SI NO TIENE = TU LOGO]
+      imgBuffer = await fetch(fixedImageUrl).then(res => res.buffer()).catch(_ => null);
     }
 
     let text = '', audioFile = '';
 
-    // [SWITCH PARA LOS 3 CASOS CON CUSTOM RAYO PREM]
+    // [SWITCH DISEÑO TEAM NIGHTWISH]
     if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_ADD) {
       audioFile = './bienvenida.mp3';
       text = chat.customWelcome
-   ? chat.customWelcome.replace(/@user/gi, user).replace(/@group/gi, groupName).replace(/@count/gi, groupMembers).replace(/@desc/gi, groupDesc)
-        : `
-⛈️ *¡ALERTA RAYO PREM!* ⚡🌩️
-╭───────────────────╮
-│ 🌩️ *NUEVO GUERRERO* 🌩️ │
-╰───────────────────╯
-
-⚡ ${user} *HA INVOCADO EL TRUENO* ⚡
-💥 Acaba de entrar a la tormenta
-
-🎮 *Grupo:* ${groupName}
-👥 *Ejército:* ${groupMembers} guerreros
-📜 *Decreto:* ${groupDesc}
-
-> "Bienvenido... o prepárate" ⚡
-`.trim();
+  ? chat.customWelcome.replace(/@user/gi, user).replace(/@group/gi, groupName).replace(/@count/gi, groupMembers).replace(/@desc/gi, groupDesc)
+        : `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ 🌙 *NUEVO INTEGRANTE*
+│
+│ ⚡ *Bienvenido:* ${user}
+│ ⛈️ *Acaba de unirse a la tormenta*
+│
+│ 🎮 *Grupo:* ${groupName}
+│ 👥 *Miembros:* ${groupMembers}
+│ 📜 *Descripción:* ${groupDesc}
+│
+│ > *“Que el trueno te guíe en la noche”*
+╰─────────────────❒`.trim();
 
     } else if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_LEAVE) {
       audioFile = './despedida.mp3';
       text = chat.customBye
-   ? chat.customBye.replace(/@user/gi, user).replace(/@group/gi, groupName).replace(/@count/gi, groupMembers).replace(/@desc/gi, groupDesc)
-        : `
-⛈️ *¡BAJA CONFIRMADA!* ⚡💨
-╭───────────────────╮
-│ 🌫️ *SE LO LLEVÓ EL VIENTO* 🌫️ │
-╰───────────────────╯
-
-💨 ${user} *FUE CONSUMIDO POR LA TORMENTA* 💨
-😔 Abandonó el campo de batalla
-
-🎮 *Grupo:* ${groupName}
-👥 *Quedan:* ${groupMembers} guerreros
-📜 *Motivo:* Se retiró por su cuenta
-
-> "Que los vientos lo acompañen" ⚡
-`.trim();
+  ? chat.customBye.replace(/@user/gi, user).replace(/@group/gi, groupName).replace(/@count/gi, groupMembers).replace(/@desc/gi, groupDesc)
+        : `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ 💨 *SALIDA REGISTRADA*
+│
+│ 🌫️ *Se fue:* ${user}
+│ ⛈️ *Abandonó la tormenta*
+│
+│ 🎮 *Grupo:* ${groupName}
+│ 👥 *Quedan:* ${groupMembers}
+│ 📜 *Motivo:* Salida voluntaria
+│
+│ > *“Que los vientos nocturnos lo acompañen”*
+╰─────────────────❒`.trim();
 
     } else if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_REMOVE) {
       audioFile = './kick.mp3';
       text = chat.customKick
-   ? chat.customKick.replace(/@user/gi, user).replace(/@group/gi, groupName).replace(/@count/gi, groupMembers).replace(/@desc/gi, groupDesc)
-        : `
-⛈️ *¡EXPULSIÓN EJECUTADA!* ⚡🚮
-╭───────────────────╮
-│ 🔥 *ACCESO DENEGADO* 🔥 │
-╰───────────────────╯
-
-🚫 ${user} *HA SIDO ELIMINADO POR EL RAYO* 🚫
-💣 Juicio del trueno aplicado
-
-🎮 *Grupo:* ${groupName}
-👥 *Quedan:* ${groupMembers} guerreros
-📜 *Motivo:* Incumplió las leyes del trueno
-
-> "El rayo no perdona" ⚡
-`.trim();
+  ? chat.customKick.replace(/@user/gi, user).replace(/@group/gi, groupName).replace(/@count/gi, groupMembers).replace(/@desc/gi, groupDesc)
+        : `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ 🚮 *EXPULSIÓN EJECUTADA*
+│
+│ 💣 *Eliminado:* ${user}
+│ ⚡ *Juicio del trueno aplicado*
+│
+│ 🎮 *Grupo:* ${groupName}
+│ 👥 *Quedan:* ${groupMembers}
+│ 📜 *Motivo:* Violó las leyes del grupo
+│
+│ > *“El rayo no perdona la traición”*
+╰─────────────────❒`.trim();
     } else return true;
 
     // 1. MENSAJE 1: IMAGEN + TEXTO PRO
@@ -120,12 +111,12 @@ export async function before(m, { conn }) {
     // 2. MENSAJE 2: AUDIO CON BARRA
     const audioPath = path.resolve(audioFile);
     if (fs.existsSync(audioPath)) {
-      await new Promise(r => setTimeout(r, 1500)); // Delay para que no se pegue
+      await new Promise(r => setTimeout(r, 1500));
       const audioBuffer = fs.readFileSync(audioPath);
       await conn.sendMessage(m.chat, {
         audio: audioBuffer,
         mimetype: 'audio/mpeg',
-        ptt: false // [AUDIO CON BARRA + TRANSCRIBIR]
+        ptt: false
       });
       console.log(`[WELCOME] ✅ Enviado: ${audioFile}`);
     } else {
