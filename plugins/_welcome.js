@@ -30,7 +30,7 @@ export async function before(m, { conn }) {
     const groupDesc = groupMetadata.desc?.toString() || '📜 Sin descripción';
     const groupMembers = groupMetadata.participants.length;
 
-    const fixedImageUrl = 'https://files.evogb.win/FXbFDD.jpg'; // [TU LOGO SOLO SI NO TIENE FOTO]
+    const fixedImageUrl = 'https://files.evogb.win/FXbFDD.jpg'; // [PON TU LOGO DE BOT LU]
 
     // [FIX] 1. FOTO DEL USER PRIMERO
     let imgBuffer = null;
@@ -48,56 +48,56 @@ export async function before(m, { conn }) {
 
     let text = '', audioFile = '';
 
-    // [SWITCH DISEÑO TEAM NIGHTWISH]
+    // [SWITCH DISEÑO BOT LU]
     if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_ADD) {
       audioFile = './bienvenida.mp3';
       text = chat.customWelcome
-  ? chat.customWelcome.replace(/@user/gi, user).replace(/@group/gi, groupName).replace(/@count/gi, groupMembers).replace(/@desc/gi, groupDesc)
-        : `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
-│ 🌙 *NUEVO INTEGRANTE*
+ ? chat.customWelcome.replace(/@user/gi, user).replace(/@group/gi, groupName).replace(/@count/gi, groupMembers).replace(/@desc/gi, groupDesc)
+        : `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🐾 *NUEVO INTEGRANTE*
 │
-│ ⚡ *Bienvenido:* ${user}
-│ ⛈️ *Acaba de unirse a la tormenta*
+│ 💖 *Bienvenido:* ${user}
+│ 😼 *Acaba de entrar a la casita*
 │
-│ 🎮 *Grupo:* ${groupName}
+│ 🏠 *Grupo:* ${groupName}
 │ 👥 *Miembros:* ${groupMembers}
 │ 📜 *Descripción:* ${groupDesc}
 │
-│ > *“Que el trueno te guíe en la noche”*
+│ > *“Ronroneos para el nuevo integrante”*
 ╰─────────────────❒`.trim();
 
     } else if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_LEAVE) {
       audioFile = './despedida.mp3';
       text = chat.customBye
-  ? chat.customBye.replace(/@user/gi, user).replace(/@group/gi, groupName).replace(/@count/gi, groupMembers).replace(/@desc/gi, groupDesc)
-        : `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+ ? chat.customBye.replace(/@user/gi, user).replace(/@group/gi, groupName).replace(/@count/gi, groupMembers).replace(/@desc/gi, groupDesc)
+        : `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
 │ 💨 *SALIDA REGISTRADA*
 │
-│ 🌫️ *Se fue:* ${user}
-│ ⛈️ *Abandonó la tormenta*
+│ 😿 *Se fue:* ${user}
+│ 🐾 *Abandonó la casita*
 │
-│ 🎮 *Grupo:* ${groupName}
+│ 🏠 *Grupo:* ${groupName}
 │ 👥 *Quedan:* ${groupMembers}
 │ 📜 *Motivo:* Salida voluntaria
 │
-│ > *“Que los vientos nocturnos lo acompañen”*
+│ > *“Lu extrañará sus ronroneos”*
 ╰─────────────────❒`.trim();
 
     } else if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_REMOVE) {
       audioFile = './kick.mp3';
       text = chat.customKick
-  ? chat.customKick.replace(/@user/gi, user).replace(/@group/gi, groupName).replace(/@count/gi, groupMembers).replace(/@desc/gi, groupDesc)
-        : `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
-│ 🚮 *EXPULSIÓN EJECUTADA*
+ ? chat.customKick.replace(/@user/gi, user).replace(/@group/gi, groupName).replace(/@count/gi, groupMembers).replace(/@desc/gi, groupDesc)
+        : `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🗑️ *EXPULSIÓN EJECUTADA*
 │
-│ 💣 *Eliminado:* ${user}
-│ ⚡ *Juicio del trueno aplicado*
+│ 🚮 *Eliminado:* ${user}
+│ 😼 *Lu protegió al grupo*
 │
-│ 🎮 *Grupo:* ${groupName}
+│ 🏠 *Grupo:* ${groupName}
 │ 👥 *Quedan:* ${groupMembers}
-│ 📜 *Motivo:* Violó las leyes del grupo
+│ 📜 *Motivo:* Violó las reglas
 │
-│ > *“El rayo no perdona la traición”*
+│ > *“No se tolera el spam en mi casa”*
 ╰─────────────────❒`.trim();
     } else return true;
 
