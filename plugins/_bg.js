@@ -8,52 +8,65 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     if (!/image\/(jpe?g|png)/.test(mime)) return m.reply(`⚠️ *Solo imágenes JPG/PNG*`);
 
     await m.react('⏳');
-    await conn.reply(m.chat, `*🧑‍💻 Quitando fondo... Probando APIs*`, m);
-
     let img = await q.download();
-    let url = await uploadImage(img);
+    
     let result = null;
     let apiUsed = '';
 
-    // TUS APIS Y KEYS DIRECTAS AQUI
-    const apis = [
-        { name: 'lolhuman', url: `https://api.lolhuman.xyz/api/removebg?apikey=GataDiosV3&img=${url}` },
-        { name: 'stellar', url: `https://api.stellarwa.xyz/removebg?apikey=api-1wGnd&url=${url}` },
-        { name: 'skizo', url: `https://skizo.tech/api/removebg?apikey=GataDios&url=${url}` },
-        { name: 'alyachan', url: `https://api.alyachan.dev/api/removebg?url=${url}` },
-        { name: 'exonity', url: `https://exonity.tech/api/removebg?apikey=GataDios&url=${url}` },
-        { name: 'ryzendesu', url: `https://api.ryzendesu.vip/api/removebg?url=${url}` },
-        { name: 'neoxr', url: `https://api.neoxr.eu/api/removebg?apikey=GataDios&image=${url}` },
-        { name: 'davidcyriltech', url: `https://api.davidcyriltech.my.id/api/removebg?url=${url}` },
-        { name: 'dorratz', url: `https://api.dorratz.com/removebg?url=${url}` },
-        { name: 'siputzx', url: `https://api.siputzx.my.id/api/iloveimg/removebg?image=${encodeURIComponent(url)}` },
-        { name: 'vreden', url: `https://api.vreden.web.id/api/removebg?url=${url}` },
-        { name: 'fgmods', url: `https://api.fgmods.xyz/api/removebg?apikey=elrebelde21&url=${url}` }
-    ];
+    try {
+        let url = await uploadImage(img);
 
-    for (let api of apis) {
+        // 1. LOLHUMAN
         try {
-            let res = await fetch(api.url, { timeout: 15000 });
+            apiUsed = 'lolhuman';
+            let res = await fetch(`https://api.lolhuman.xyz/api/removebg?apikey=GataDiosV3&img=${url}`);
             let json = await res.json();
-            
-            // Detectar resultado segun cada API
-            if (json.result) result = json.result;
-            else if (json.data?.url) result = json.data.url;
-            else if (json.data) result = json.data;
-            else if (json.image) result = json.image;
-            else continue;
+            if (json.status == 200) result = json.result;
+            else throw json.message;
+        } catch { result = null }
 
-            apiUsed = api.name;
-            break;
-        } catch (e) {
-            console.log(`[X] ${api.name} fallo`)
-            continue;
-        }
+        // 2. STELLAR
+        if (!result) try {
+            apiUsed = 'stellar';
+            let res = await fetch(`https://api.stellarwa.xyz/removebg?apikey=api-1wGnd&url=${url}`);
+            let json = await res.json();
+            if (json.status) result = json.result;
+            else throw json.message;
+        } catch { result = null }
+
+        // 3. SKIZO
+        if (!result) try {
+            apiUsed = 'skizo';
+            let res = await fetch(`https://skizo.tech/api/removebg?apikey=GataDios&url=${url}`);
+            let json = await res.json();
+            if (json.status) result = json.result;
+            else throw json.message;
+        } catch { result = null }
+
+        // 4. SIPUTZX - Esta es la mas estable gratis
+        if (!result) try {
+            apiUsed = 'siputzx';
+            let res = await fetch(`https://api.siputzx.my.id/api/iloveimg/removebg?image=${encodeURIComponent(url)}`);
+            if (res.ok) result = res.url; // siputzx devuelve directo
+            else throw 'error';
+        } catch { result = null }
+
+        // 5. EXONITY
+        if (!result) try {
+            apiUsed = 'exonity';
+            let res = await fetch(`https://exonity.tech/api/removebg?apikey=GataDios&url=${url}`);
+            let json = await res.json();
+            if (json.status) result = json.result;
+            else throw json.message;
+        } catch { result = null }
+
+    } catch (e) {
+        console.log(e)
     }
 
     if (!result) {
         await m.react('❌');
-        return m.reply('⚠️ *Todas las APIs fallaron. Intenta más tarde*');
+        return m.reply('⚠️ *Todas las APIs fallaron. Prueba con otra imagen*');
     }
 
     await conn.sendMessage(m.chat, {
