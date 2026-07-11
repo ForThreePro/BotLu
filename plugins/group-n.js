@@ -2,39 +2,39 @@ let mutedUsers = new Set();
 
 let handler = async (m, { conn, command, participants }) => {
     let mentionedJid = m.mentionedJid[0]? m.mentionedJid[0] : m.quoted? m.quoted.sender : false;
-    if (!mentionedJid) return m.reply(`╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
-│ 🔇 *SISTEMA DE MUTE*
+    if (!mentionedJid) return m.reply(`╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🔇 *SISTEMA DE SILENCIO*
 │
-│ ⚡ *Etiqueta a una persona o responde a un mensaje*
+│ 😼 *Etiqueta a una persona o responde a un mensaje*
 ╰─────────────────❒`);
 
     let isUserAdmin = participants.find(p => p.id === mentionedJid)?.admin;
-    if (isUserAdmin) return m.reply(`╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+    if (isUserAdmin) return m.reply(`╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
 │ ❌ *ERROR*
 │
-│ ⚡ *No puedes mutear a un administrador*
+│ 😿 *Lu no puede silenciar a un administrador*
 ╰─────────────────❒`);
-    if (mentionedJid === conn.user.jid) return m.reply(`╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+    if (mentionedJid === conn.user.jid) return m.reply(`╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
 │ ❌ *ERROR*
 │
-│ ⚡ *No puedo mutearme a mi mismo*
+│ 😿 *Lu no puede silenciarse sola*
 ╰─────────────────❒`);
 
     if (command === "mute") {
         mutedUsers.add(mentionedJid);
-        conn.reply(m.chat, `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+        conn.reply(m.chat, `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
 │ 🔇 *USUARIO SILENCIADO*
 │
-│ ⚡ *@${mentionedJid.split('@')[0]}*
-│ 🌙 *Sus mensajes serán eliminados*
+│ 😼 *@${mentionedJid.split('@')[0]}*
+│ 🐾 *Lu le quitó la voz por un rato*
 ╰─────────────────❒`, m, { mentions: [mentionedJid] });
     } else if (command === "unmute") {
         mutedUsers.delete(mentionedJid);
-        conn.reply(m.chat, `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+        conn.reply(m.chat, `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
 │ 🔊 *USUARIO DESMUTEADO*
 │
-│ ⚡ *@${mentionedJid.split('@')[0]}*
-│ 🌙 *Ya puede hablar de nuevo*
+│ 😼 *@${mentionedJid.split('@')[0]}*
+│ 🐾 *Lu le devolvió la voz*
 ╰─────────────────❒`, m, { mentions: [mentionedJid] });
     }
 };
@@ -57,4 +57,4 @@ handler.group = true;
 handler.admin = true;
 handler.botAdmin = true;
 
-export default handler;
+export default handler
