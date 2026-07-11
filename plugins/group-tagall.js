@@ -5,8 +5,8 @@ const handler = async (m, { isOwner, isAdmin, conn, participants, args }) => {
       return;
     }
 
-    const customMessage = args.join(' ') || '⛈️ Invocación del Trueno';
-    const groupMetadata = await conn.groupMetadata(m.chat).catch(() => ({ subject: 'Grupo', participants: [] }));
+    const customMessage = args.join(' ') || '🐾 Lu reunió a todos en la casita';
+    const groupMetadata = await conn.groupMetadata(m.chat).catch(() => ({ subject: 'Casita', participants: [] }));
     const groupName = groupMetadata.subject;
 
     // Lista de banderas por prefijo
@@ -52,15 +52,15 @@ const handler = async (m, { isOwner, isAdmin, conn, participants, args }) => {
 
     const orderedFlags = countryFlags.map(c => c.bandera).concat(['🚩']);
 
-    // Texto con estética Team Nightwish
-    let messageText = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+    // Texto con estética Bot Lu
+    let messageText = `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
 │ 📢 *INVOCACIÓN GENERAL*
 │
-│ 🌐 *Grupo:* ${groupName}
-│ ⚡ *Integrantes:* ${participants.length}
-│ 🌙 *Mensaje:* ${customMessage}
+│ 🏠 *Casita:* ${groupName}
+│ 🐾 *Gatitos:* ${participants.length}
+│ 😼 *Mensaje:* ${customMessage}
 │
-├─❒ *INTEGRANTES POR PAÍS* ❒
+├─❒ *GATITOS POR PAÍS* ❒
 `;
 
     for (const flag of orderedFlags) {
@@ -75,15 +75,15 @@ const handler = async (m, { isOwner, isAdmin, conn, participants, args }) => {
 
     messageText += `╰─────────────────❒
 │
-│ > *“Que el trueno los reúna”*
+│ > *“Lu los llamó a todos”* 😼
 ╰─────────────────❒`;
 
-    // NUEVO: Detectar foto del grupo
+    // Foto del grupo
     let img
     try {
-      img = await conn.profilePictureUrl(m.chat, 'image') // Foto del grupo
+      img = await conn.profilePictureUrl(m.chat, 'image') // Foto de la casita
     } catch {
-      img = 'https://files.evogb.win/jgBvm8.jpg' // Fallback trueno
+      img = 'https://files.evogb.win/jgBvm8.jpg' // Fallback gatito
     }
 
     await conn.sendMessage(m.chat, {
@@ -93,11 +93,11 @@ const handler = async (m, { isOwner, isAdmin, conn, participants, args }) => {
     }, { quoted: m });
 
   } catch (error) {
-    console.error("[ERROR EN NIGHTWISH]:", error);
-    conn.reply(m.chat, `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
-│ ⛈️ *ERROR*
+    console.error("[ERROR EN BOT LU]:", error);
+    conn.reply(m.chat, `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 😿 *ERROR*
 │
-│ ⚡ *Ocurrió un error al ejecutar el comando*
+│ 🐾 *Ocurrió un error al ejecutar el comando*
 ╰─────────────────❒`, m);
   }
 };
