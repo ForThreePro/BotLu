@@ -1,6 +1,11 @@
 const handler = async (m, { conn, text, command, isAdmin, isOwner }) => {
     if (!m.isGroup || (!isAdmin &&!isOwner)) {
-        return m.reply('⛈️ *RAYO PREM* ⚡\n\n❌ *¡ACCESO DENEGADO!*\nSolo los admins o el dueño pueden controlar la tormenta.');
+        return m.reply(`╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ ⛈️ *ACCESO DENEGADO*
+│
+│ ⚡ *Solo los admins o el dueño*
+│ 🌙 *pueden controlar la tormenta*
+╰─────────────────❒`);
     }
 
     let chat = global.db.data.chats[m.chat]
@@ -8,14 +13,36 @@ const handler = async (m, { conn, text, command, isAdmin, isOwner }) => {
     chat = global.db.data.chats[m.chat]
 
     if (command === 'setbye') {
-        if (!text) return m.reply(`🌩️ *RAYO PREM SETBYE* ⚡\n\n❌ *¡FALTA EL MENSAJE!*\n\n💡 *Ejemplo:*\n.setbye 💨 @user fue consumido por la tormenta ⚡`);
+        if (!text) return m.reply(`╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ 🌩️ *CONFIGURAR DESPEDIDA*
+│
+│ ⚡ *Falta el mensaje*
+│
+│ 💡 *Ejemplo:*
+│ .setbye 💨 @user fue consumido por la tormenta ⚡
+╰─────────────────❒`);
         chat.customBye = text.trim();
-        return m.reply(`⛈️ *RAYO PREM* ⚡\n\n✅ *¡DESPEDIDA GUARDADA!*\n\n📝 *Vista previa:*\n\`\`${text.trim()}\`\n\n🗑️ *Para borrar:* .delbye`);
+        return m.reply(`╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ ✅ *DESPEDIDA GUARDADA*
+│
+│ 📝 *Vista previa:*
+│ \`\`${text.trim()}\`\`
+│
+│ 🗑️ *Para borrar:* .delbye
+╰─────────────────❒`);
     }
     if (command === 'delbye') {
-        if (!chat.customBye) return m.reply('🌩️ *RAYO PREM* ⚡\n\n⚠️ *No tienes una despedida editada.*');
+        if (!chat.customBye) return m.reply(`╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ ⚠️ *SIN DESPEDIDA*
+│
+│ 🌙 *No tienes una despedida editada*
+╰─────────────────❒`);
         delete chat.customBye;
-        return m.reply('⛈️ *RAYO PREM* ⚡\n\n✅ *¡LISTO!*\n\n🗑️ Se eliminó la despedida personalizada.');
+        return m.reply(`╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ ✅ *DESPEDIDA ELIMINADA*
+│
+│ 🗑️ *Se borró el mensaje personalizado*
+╰─────────────────❒`);
     }
 };
 handler.help = ['setbye <Mensaje>', 'delbye'];
