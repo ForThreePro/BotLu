@@ -1,18 +1,43 @@
 const handler = async (m, { conn, args, isAdmin, isOwner }) => {
     // Validación de permisos para el comando
-    if (!isAdmin &&!isOwner) throw "⛈️ *RAYO PREM ERROR* ➔ *Solo los administradores pueden usar este comando.*" // Cambiado
+    if (!isAdmin &&!isOwner) throw `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ 🛡️ *ACCESO DENEGADO*
+│ Solo *ADMINS* pueden usar esto
+╰─────────────────❒`
 
     let chat = global.db.data.chats[m.chat]
     if (!chat) global.db.data.chats[m.chat] = {}
 
     if (/on/i.test(args[0])) {
         chat.modoadmin = true
-        await conn.reply(m.chat, `⛈️ *RAYO PREM MODO ADMIN* 🌙\n\n⚡ *MODO ADMINISTRADOR ACTIVADO*\n\n🌩️ *Ahora solo admins pueden usar los comandos en este grupo.*\n⛈️ *Team Nightwish*`, m) // Cambiado
+        await conn.reply(m.chat, `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ ⚡ *MODO ADMIN ACTIVADO*
+│
+│ 🌙 *Estado:* ENCENDIDO
+│ 🛡️ *Restricción:* Solo Admins
+│ ⛈️ *Los comandos están bloqueados*
+│
+│ > *“El trueno vigila el grupo”*
+╰─────────────────❒`, m)
     } else if (/off/i.test(args[0])) {
         chat.modoadmin = false
-        await conn.reply(m.chat, `⛈️ *RAYO PREM MODO ADMIN* 🌙\n\n❌ *MODO ADMINISTRADOR DESACTIVADO*\n\n🌩️ *Todos pueden usar el bot nuevamente.*`, m) // Cambiado
+        await conn.reply(m.chat, `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ ❌ *MODO ADMIN DESACTIVADO*
+│
+│ 🌙 *Estado:* APAGADO
+│ ✅ *Todos pueden usar el bot*
+│ 🌩️ *Chat libre nuevamente*
+╰─────────────────❒`, m)
     } else {
-        await conn.reply(m.chat, `⛈️ *RAYO PREM MODO ADMIN* 🌙\n\n📌 *Uso:* *.modoadmin on* / *.modoadmin off*\n⚡ *Bloquea el bot para que solo admins lo usen*`, m) // Cambiado
+        await conn.reply(m.chat, `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ 🌩️ *PANEL MODO ADMIN*
+│
+│ 📌 *Uso:*.modoadmin on /.modoadmin off
+│ ⚡ *Función:* Restringe comandos a admins
+│ 🛡️ *Protege:* Uso indebido del bot
+│
+│ 🌙 *Control total del grupo*
+╰─────────────────❒`, m)
     }
 }
 
@@ -32,7 +57,13 @@ handler.before = async function (m, { conn, isAdmin, isOwner, isROwner, isPrems 
         if (chat.modoadmin &&!isAdmin &&!isOwner &&!isROwner &&!isPrems) {
             // Si el usuario intenta usar un comando (empieza con prefijo), bloqueamos
             if (m.text.startsWith('.') || m.text.startsWith('/') || m.text.startsWith('#')) {
-                await conn.reply(m.chat, `⛈️ *RAYO PREM BLOQUEO* 🌙\n\n⚡ *MODO ADMIN ACTIVADO*\n\n❌ *No tienes permiso para usar comandos aquí.*`, m) // Aviso
+                await conn.reply(m.chat, `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+│ ⛈️ *ACCESO BLOQUEADO*
+│
+│ ⚡ *Modo Admin:* ACTIVO
+│ ❌ *No tienes permiso*
+│ 🌙 *Solo admins pueden usar comandos*
+╰─────────────────❒`, m)
                 return false // Detiene la ejecución de otros plugins
             }
         }
