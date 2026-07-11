@@ -1,14 +1,13 @@
 let handler = async (m) => {
     let _uptime = process.uptime() * 1000
     let uptime = clockString(_uptime)
-    m.reply(`╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
-│ ⏰ *TIEMPO ACTIVO*
+    m.reply(`╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🐾 *TIEMPO ACTIVO*
 │
 │ ⚡ *Online:* ${uptime}
-│ 🌙 *Estado:* El trueno no duerme
+│ 😼 *Estado:* Lu no duerme, solo ronronea
 ╰─────────────────❒`)
 }
-
 function clockString(ms) {
     let d = Math.floor(ms / 86400000)
     let h = Math.floor(ms / 3600000) % 24
@@ -16,9 +15,5 @@ function clockString(ms) {
     let s = Math.floor(ms / 1000) % 60
     return `${d}d ${h}h ${m}m ${s}s`
 }
-
 handler.help = ['uptime']
-handler.tags = ['main']
-handler.command = ['uptime']
-
-export default handler
+handler.tags =
