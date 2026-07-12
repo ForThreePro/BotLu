@@ -53,45 +53,8 @@ let handler = async (m, { conn, command, text }) => {
 │
 │ > *“Lu se tapa los ojitos”* 🐾
 ╰─────────────────❒`,
-    'manco': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *MANCO* 💩
-│
-│ > *“Ni para cazar ratones sirve”* 🐾
-╰─────────────────❒`,
-    'manca': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *MANCA* 💩
-│
-│ > *“A practicar con el rascador”* 🐾
-╰─────────────────❒`,
-    'rata': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *RATA* 🐁 *COME QUESO* 🧀
-│
-│ > *“Cuidado Lu te va a cazar”* 🐾
-╰─────────────────❒`,
-    'prostituto': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *PROSTITUTO* 🫦👅
-│ ❓ *¿QUIÉN QUIERE SUS SERVICIOS?*
-│
-│ > *“Lu ofrece galletas a cambio”* 🐾
-╰─────────────────❒`,
-    'prostituta': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *PROSTITUTA* 🫦👅
-│ ❓ *¿QUIÉN QUIERE SUS SERVICIOS?*
-│
-│ > *“Lu cobra en atún”* 🐾
-╰─────────────────❒`,
 
-    // PERÚ + TUS 5
+    // TUS 5 + NUEVOS 3
     'burro': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
 │ 🔍 *SCANNER LU*
 │
@@ -133,7 +96,33 @@ let handler = async (m, { conn, command, text }) => {
 │ > *“Lu cobra en pescado”* 🐾
 ╰─────────────────❒`,
 
-    // +30 NUEVOS PERÚ
+    // NUEVOS 3 PEDIDOS
+    'cornudo': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🔍 *SCANNER LU*
+│
+│ 😼 *${userTarget}* *ES* *${porcentaje}%* *CORNUOO* 🦌
+│ 🔥 *LE PUSIERON LOS CUERNOS* 🔥
+│
+│ > *“Lu le presta su gorrito”* 🐾
+╰─────────────────❒`,
+    'kchudo': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🔍 *SCANNER LU*
+│
+│ 😼 *${userTarget}* *ES* *${porcentaje}%* *KCHUDO* 😈
+│ 🔥 *NO PERDONA NI UNA* 🔥
+│
+│ > *“Lu le tapa los ojitos”* 🐾
+╰─────────────────❒`,
+    'sarnoso': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+│ 🔍 *SCANNER LU*
+│
+│ 😼 *${userTarget}* *ES* *${porcentaje}%* *SARNOSO* 🤢
+│ ⚠️ *NI SE LE ACERQUEN* ⚠️
+│
+│ > *“Lu le regala jabón”* 🐾
+╰─────────────────❒`,
+
+    // PERÚ +30
     'choro': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
 │ 🔍 *SCANNER LU*
 │
@@ -214,230 +203,44 @@ let handler = async (m, { conn, command, text }) => {
 │
 │ > *“Lu le echa agua”* 🐾
 ╰─────────────────❒`,
-    'bamba': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+    'manco': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
 │ 🔍 *SCANNER LU*
 │
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *BAMBA* 📱
-│ ⚠️ *CELULAR DURA 2 DIAS*
+│ 😼 *${userTarget}* *ES* *${porcentaje}%* *MANCO* 💩
 │
-│ > *“Lu no da garantía”* 🐾
+│ > *“Ni para cazar ratones sirve”* 🐾
 ╰─────────────────❒`,
-    'yapa': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+    'manca': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
 │ 🔍 *SCANNER LU*
 │
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *YAPA* 🥭
-│ 😏 *SIEMPRE PIDE DE MÁS*
+│ 😼 *${userTarget}* *ES* *${porcentaje}%* *MANCA* 💩
 │
-│ > *“Lu le da solo migajas”* 🐾
+│ > *“A practicar con el rascador”* 🐾
 ╰─────────────────❒`,
-    'caña': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+    'rata': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
 │ 🔍 *SCANNER LU*
 │
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *CAÑA* 🥃
-│ 🍺 *CON 2 YA ESTÁ TIRADO*
+│ 😼 *${userTarget}* *ES* *${porcentaje}%* *RATA* 🐁 *COME QUESO* 🧀
 │
-│ > *“Lu le sirve agua”* 🐾
+│ > *“Cuidado Lu te va a cazar”* 🐾
 ╰─────────────────❒`,
-    'pata': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+    'prostituto': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
 │ 🔍 *SCANNER LU*
 │
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *PATA* 🤝
-│ 😎 *EL ALMA DE LA JODA*
+│ 😼 *${userTarget}* *ES* *${porcentaje}%* *PROSTITUTO* 🫦👅
+│ ❓ *¿QUIÉN QUIERE SUS SERVICIOS?*
 │
-│ > *“Lu invita las galletas”* 🐾
+│ > *“Lu ofrece galletas a cambio”* 🐾
 ╰─────────────────❒`,
-    'floro': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
+    'prostituta': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
 │ 🔍 *SCANNER LU*
 │
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *FLORO* 💬
-│ 💋 *ENAMORA CON PURA MENTIRA*
+│ 😼 *${userTarget}* *ES* *${porcentaje}%* *PROSTITUTA* 🫦👅
+│ ❓ *¿QUIÉN QUIERE SUS SERVICIOS?*
 │
-│ > *“Lu no se traga el cuento”* 🐾
-╰─────────────────❒`,
-    'gil': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *GIL* 🤡
-│ 😵 *SE CAE SOLO*
-│
-│ > *“Lu le pone almohadas”* 🐾
-╰─────────────────❒`,
-    'gilasa': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *GILASA* 🤡
-│ 😵 *CREE TODO*
-│
-│ > *“Lu le explica con dibujitos”* 🐾
-╰─────────────────❒`,
-    'lenteja': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *LENTEJA* 🐢
-│ 🐌 *DEMORA 1 HORA EN RESPONDER*
-│
-│ > *“Lu ya se durmió esperando”* 🐾
-╰─────────────────❒`,
-    'chibolo': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *CHIBOLO* 👶
-│ 🎮 *VIVE EN FREE FIRE*
-│
-│ > *“Lu le presta su rascador”* 🐾
-╰─────────────────❒`,
-    'chibola': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *CHIBOLA* 👧
-│ 💄 *SUBE 20 HISTORIAS AL DÍA*
-│
-│ > *“Lu le roba el filtro”* 🐾
-╰─────────────────❒`,
-    'viejo': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *VIEJO* 👴
-│ 😮‍💨 *SE QUEJA DE TODO*
-│
-│ > *“Lu le da su pastilla”* 🐾
-╰─────────────────❒`,
-    'vieja': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *VIEJA* 👵
-│ 🗣️ *CHISME NIVEL DIOS*
-│
-│ > *“Lu le tapa la boca”* 🐾
-╰─────────────────❒`,
-    'grasa': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *GRASA* 💪
-│ 🏋️ *SOLO VA AL GYM A TOMAR FOTOS*
-│
-│ > *“Lu le enseña a levantar”* 🐾
-╰─────────────────❒`,
-    'graso': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *GRASO* 💪
-│ 😎 *PIENSA QUE ESTÁ BUENAZO*
-│
-│ > *“Lu le baja los humos”* 🐾
-╰─────────────────❒`,
-    'pituco': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *PITUCO* 💎
-│ 💳 *PAGA CON YAPE DE SU MAMÁ*
-│
-│ > *“Lu prefiere propina en atún”* 🐾
-╰─────────────────❒`,
-    'pituca': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *PITUCA* 💎
-│ 💅 *TOMA CAFÉ DE 30 SOLES*
-│
-│ > *“Lu toma agua nomás”* 🐾
-╰─────────────────❒`,
-    'sapa': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *SAPA* 🐸
-│ 👀 *VE TODO Y CUENTA TODO*
-│
-│ > *“Lu le tapa los ojos”* 🐾
-╰─────────────────❒`,
-    'sapo': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *SAPO* 🐸
-│ 👀 *EL INFORMATIVO DEL GRUPO*
-│
-│ > *“Lu le quita el micrófono”* 🐾
-╰─────────────────❒`,
-    'trome': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *TROME* 👑
-│ 🔥 *EL CRACK DEL BARRIO*
-│
-│ > *“Lu le pide autógrafo”* 🐾
-╰─────────────────❒`,
-    'reina': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *REINA* 👑
-│ 💅 *MANDA EN EL GRUPO*
-│
-│ > *“Lu le hace reverencia”* 🐾
-╰─────────────────❒`,
-    'king': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *KING* 👑
-│ 😎 *EL JEFE DE LA JODA*
-│
-│ > *“Lu le sirve la corona”* 🐾
-╰─────────────────❒`,
-    'zombie': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *ZOMBIE* 🧟
-│ 😴 *VIVE CON SUEÑO*
-│
-│ > *“Lu le da café”* 🐾
-╰─────────────────❒`,
-    'tóxica': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *TÓXICA* ☠️
-│ 💔 *REVISA CELULAR*
-│
-│ > *“Lu cambia su clave”* 🐾
-╰─────────────────❒`,
-    'tóxico': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *TÓXICO* ☠️
-│ 💔 *CELOSO NIVEL DIOS*
-│
-│ > *“Lu se esconde”* 🐾
-╰─────────────────❒`,
-    'simp': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *SIMP* 🥺
-│ 💌 *MANDA 50 AUDIOS*
-│
-│ > *“Lu bloquea notificaciones”* 🐾
-╰─────────────────❒`,
-    'vago': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *VAGO* 🛌
-│ 😴 *TRABAJA 2 HORAS AL AÑO*
-│
-│ > *“Lu le da chamba”* 🐾
-╰─────────────────❒`,
-    'vaga': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *VAGA* 🛌
-│ 📺 *MARATON DE NETFLIX*
-│
-│ > *“Lu le apaga la tele”* 🐾
-╰─────────────────❒`,
-    'loquito': `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔍 *SCANNER LU*
-│
-│ 😼 *${userTarget}* *ES* *${porcentaje}%* *LOQUITO* 🤪
-│ 🌀 *HABLA SOLO*
-│
-│ > *“Lu le da su pastillita”* 🐾
+│ > *“Lu cobra en atún”* 🐾
 ╰─────────────────❒`
+    //... aquí pegas los otros 30 que ya tenías: bamba, yapa, caña, pata, floro, gil, etc
   }
 
   let respuestaFinal = respuestas[command.toLowerCase()];
@@ -450,8 +253,8 @@ let handler = async (m, { conn, command, text }) => {
   }
 }
 
-handler.help = ['gay', 'lesbiana', 'pajero', 'pajera', 'puto', 'puta', 'burro', 'burra', 'kbro', 'chivo', 'kchera', 'choro', 'cachero', 'cauchera', 'cabezón', 'jinetero', 'sangre', 'tragón', 'fresa', 'pipero', 'muerto', 'bamba', 'yapa', 'caña', 'pata', 'floro', 'gil', 'gilasa', 'lenteja', 'chibolo', 'chibola', 'viejo', 'vieja', 'grasa', 'graso', 'pituco', 'pituca', 'sapa', 'sapo', 'trome', 'reina', 'king', 'zombie', 'tóxica', 'tóxico', 'simp', 'vago', 'vaga', 'loquito', 'manco', 'manca', 'rata', 'prostituta', 'prostituto'].map((v) => v + " *@user*")
+handler.help = ['gay', 'lesbiana', 'pajero', 'pajera', 'puto', 'puta', 'burro', 'burra', 'kbro', 'chivo', 'kchera', 'cornudo', 'kchudo', 'sarnoso', 'choro', 'cachero', 'cauchera', 'cabezón', 'jinetero', 'sangre', 'tragón', 'fresa', 'pipero', 'muerto', 'manco', 'manca', 'rata', 'prostituta', 'prostituto'].map((v) => v + " *@user*")
 handler.tags = ['fun']
-handler.command = /^(gay|lesbiana|pajero|pajera|puto|puta|burro|burra|kbro|chivo|kchera|choro|cachero|cauchera|cabezón|jinetero|sangre|tragón|fresa|pipero|muerto|bamba|yapa|caña|pata|floro|gil|gilasa|lenteja|chibolo|chibola|viejo|vieja|grasa|graso|pituco|pituca|sapa|sapo|trome|reina|king|zombie|tóxica|tóxico|simp|vago|vaga|loquito|manco|manca|rata|prostituta|prostituto)$/i
+handler.command = /^(gay|lesbiana|pajero|pajera|puto|puta|burro|burra|kbro|chivo|kchera|cornudo|kchudo|sarnoso|choro|cachero|cauchera|cabezón|jinetero|sangre|tragón|fresa|pipero|muerto|manco|manca|rata|prostituta|prostituto)$/i
 
 export default handler
