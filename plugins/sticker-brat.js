@@ -4,13 +4,13 @@ import { exec } from 'child_process'
 
 var handler = async (m, { conn, text, usedPrefix, command }) => {
     let final = text ? text.trim() : (m.quoted?.text || null)
-    if (!final) return conn.reply(m.chat, `⚡ *Escribe el contenido para tu sticker*\n\n> *Ejemplo:* ${usedPrefix + command} Hola mundo`, m)
+    if (!final) return conn.reply(m.chat, `🐱 *BOT LU* ➔ Maulla el texto para tu sticker\n> *Ejemplo:* ${usedPrefix + command} Soy el rey del techo`, m)
 
     if (final.length > 35) {
-        return conn.reply(m.chat, `⚠️ *Demasiado largo.*\n\n📌 Máximo: *35 letras*`, m)
+        return conn.reply(m.chat, `🐱 *BOT LU* ➔ Demasiado largo michi.\n\n📌 Máximo: *35 letras*`, m)
     }
 
-    await m.react('🕒')
+    await m.react('🐾')
 
     try {
         const formatted = wrap(final, 28)
@@ -24,7 +24,7 @@ var handler = async (m, { conn, text, usedPrefix, command }) => {
         fs.writeFileSync(img, res.data)
 
         await new Promise((resolve, reject) => {
-            exec(`ffmpeg -i ${img} -vcodec libwebp -vf "scale=512:512:force_original_aspect_ratio=decrease,format=rgba,pad=512:512:(ow-iw)/2:(oh-ih)/2:color=#00000000" ${webp}`, (err) => {
+            exec(`ffmpeg -i ${img} -vcodec libwebp -vf "scale=512:512:force_original_aspect_ratio=decrease,format=rgba,pad=512:512:(ow-iw)/2:(oh-ih)/2:color=#00000" ${webp}`, (err) => {
                 if (err) reject(err)
                 else resolve()
             })
@@ -32,18 +32,18 @@ var handler = async (m, { conn, text, usedPrefix, command }) => {
 
         await conn.sendMessage(m.chat, { 
             sticker: fs.readFileSync(webp), 
-            packname: "Barboza Developer 👤", 
-            author: "Dev Barboza x Zona Developers ⚡" 
+            packname: "Bot Lu Stickers 🐾", 
+            author: "Whois Yallico 🐾" 
         }, { quoted: m })
 
-        await m.react('✔️')
+        await m.react('😼')
 
         if (fs.existsSync(img)) fs.unlinkSync(img)
         if (fs.existsSync(webp)) fs.unlinkSync(webp)
 
     } catch (e) {
         await m.react('❌')
-        m.reply('⚠️ Error en la generación.')
+        m.reply('🐱 *BOT LU ERROR* ➔ Se me cayó el ovillo al generar el sticker.')
     }
 }
 
@@ -63,8 +63,9 @@ function wrap(text, max = 22) {
     return lines.join('\n')
 }
 
-handler.help = ['brat']
+handler.help = ['brat <texto>']
 handler.tags = ['sticker']
 handler.command = /^(brat)$/i
+handler.limit = true
 
 export default handler
