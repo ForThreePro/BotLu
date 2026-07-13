@@ -1,18 +1,18 @@
 let handler = async (m, { conn }) => {
     try {
         await conn.groupParticipantsUpdate(m.chat, [conn.user.jid], 'promote')
-        m.reply(`╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+        m.reply(`╭─❒ *『 𝗕𝗢𝗧 𝗟𝗨 』* ❒
 │ 👑 *AUTOPROMOTE*
 │
 │ ✅ *Estado:* Admin asignado
-│ ⚡ *El trueno toma el control*
+│ 😼 *Bot Lu toma las riendas de la casa*
 ╰─────────────────❒`)
     } catch (e) {
-        m.reply(`╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+        m.reply(`╭─❒ *『 𝗕𝗢𝗧 𝗟𝗨 』* ❒
 │ ❌ *ERROR AUTOPROMOTE*
 │
-│ ⚠️ *No pude asignarme admin*
-│ 🌙 *Dame permisos primero*
+│ ⚠️ *No pude darme admin michi*
+│ 🐾 *Hazme admin primero para cuidar el grupo*
 ╰─────────────────❒`)
     }
 }
