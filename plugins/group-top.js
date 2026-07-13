@@ -4,10 +4,10 @@ import path from 'path'
 let user = a => '@' + a.split('@')[0]
 
 function handler(m, { groupMetadata, command, conn, text, usedPrefix}) {
-if (!text) return m.reply(`╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
-│ 🏆 *TOP 10*
+if (!text) return m.reply(`╭─❒ *『 𝗕𝗢𝗧 𝗟𝗨 』* ❒
+│ 🏆 *TOP 10 GATUNO*
 │
-│ ⚡ *Ejemplo:*.top gente mas activa
+│ 🐾 *Ejemplo:*.top gente mas activa
 ╰─────────────────❒`)
 
 let ps = groupMetadata.participants.map(v => v.id)
@@ -22,30 +22,31 @@ let h = ps.getRandom()
 let i = ps.getRandom()
 let j = ps.getRandom()
 let k = Math.floor(Math.random() * 70);
-let x = `${pickRandom(['⛈️','🌩️','⚡','🌙','🔥','💀','😎','🤙','👑','💥'])}`
+let x = `${pickRandom(['🐱','😼','🐾','👑','🔥','💤','😻','😹','😽','🐈'])}`
 let vn = `https://hansxd.nasihosting.com/sound/sound${k}.mp3`
 
-let top = `╭─❒ *『 𝗧𝗘𝗔𝗠 𝗡𝗜𝗚𝗛𝗧𝗪𝗜𝗦𝗛 』* ❒
+let top = `╭─❒ *『 𝗕𝗢𝗧 𝗟𝗨 』* ❒
 │ 🏆 *TOP 10: ${text.toUpperCase()}*
 │
 │ 👑 *1.* ${user(a)}
 │ 👑 *2.* ${user(b)}
 │ 👑 *3.* ${user(c)}
-│ ⚡ *4.* ${user(d)}
-│ ⚡ *5.* ${user(e)}
-│ ⚡ *6.* ${user(f)}
-│ ⚡ *7.* ${user(g)}
-│ ⚡ *8.* ${user(h)}
-│ ⚡ *9.* ${user(i)}
-│ ⚡ *10.* ${user(j)}
+│ 🐾 *4.* ${user(d)}
+│ 🐾 *5.* ${user(e)}
+│ 🐾 *6.* ${user(f)}
+│ 🐾 *7.* ${user(g)}
+│ 🐾 *8.* ${user(h)}
+│ 🐾 *9.* ${user(i)}
+│ 🐾 *10.* ${user(j)}
 │
-│ > *“Que el trueno elija a los mejores”*
+│ > *“El gato elige a sus favoritos”*
 ╰─────────────────❒`
 
 m.reply(top, null, { mentions: [a, b, c, d, e, f, g, h, i, j]})
 }
 
-handler.help = handler.command = ['top']
+handler.help = ['top <texto>']
+handler.command = ['top']
 handler.tags = ['fun']
 handler.group = true
 export default handler
