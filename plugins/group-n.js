@@ -2,39 +2,50 @@ let mutedUsers = new Set();
 
 let handler = async (m, { conn, command, participants }) => {
     let mentionedJid = m.mentionedJid[0]? m.mentionedJid[0] : m.quoted? m.quoted.sender : false;
-    if (!mentionedJid) return m.reply(`╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔇 *SISTEMA DE SILENCIO*
+    if (!mentionedJid) return m.reply(`╭─🐾 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐾
+│ 🐱 *MIAU! ERROR*
 │
-│ 😼 *Etiqueta a una persona o responde a un mensaje*
+│ 🎀 *USO:* Responde a un mensaje
+│
+│ > *“Necesito a quien callar, humano~”* 🐾
 ╰─────────────────❒`);
 
     let isUserAdmin = participants.find(p => p.id === mentionedJid)?.admin;
-    if (isUserAdmin) return m.reply(`╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ ❌ *ERROR*
+    if (isUserAdmin) return m.reply(`╭─🐾 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐾
+│ 👑 *NO PUEDO*
 │
-│ 😿 *Lu no puede silenciar a un administrador*
+│ ⚠️ *No se puede mutear a un administrador*
+│
+│ > *“Es un gato importante, miau~”* 🐱
 ╰─────────────────❒`);
-    if (mentionedJid === conn.user.jid) return m.reply(`╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ ❌ *ERROR*
+
+    if (mentionedJid === conn.user.jid) return m.reply(`╭─🐾 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐾
+│ 😿 *MIAU TRISTE*
 │
-│ 😿 *Lu no puede silenciarse sola*
+│ ⚠️ *No puedo mutearme a mí misma*
+│
+│ > *“¿Quién maullaría entonces?”* 🐾
 ╰─────────────────❒`);
 
     if (command === "mute") {
         mutedUsers.add(mentionedJid);
-        conn.reply(m.chat, `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔇 *USUARIO SILENCIADO*
+        conn.reply(m.chat, `╭─🐾 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐾
+│ 🔇 *GATITO SILENCIADO*
 │
-│ 😼 *@${mentionedJid.split('@')[0]}*
-│ 🐾 *Lu le quitó la voz por un rato*
+│ 👤 *Objetivo:* @${mentionedJid.split('@')[0]}
+│ 📊 *Estado:* MUTE ACTIVADO
+│
+│ > *“Shhh... ya no maullará más”* 😼
 ╰─────────────────❒`, m, { mentions: [mentionedJid] });
     } else if (command === "unmute") {
         mutedUsers.delete(mentionedJid);
-        conn.reply(m.chat, `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🔊 *USUARIO DESMUTEADO*
+        conn.reply(m.chat, `╭─🐾 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐾
+│ 🔊 *GATITO LIBERADO*
 │
-│ 😼 *@${mentionedJid.split('@')[0]}*
-│ 🐾 *Lu le devolvió la voz*
+│ 👤 *Objetivo:* @${mentionedJid.split('@')[0]}
+│ 📊 *Estado:* MUTE DESACTIVADO
+│
+│ > *“Ya puede maullar de nuevo~”* 🐱
 ╰─────────────────❒`, m, { mentions: [mentionedJid] });
     }
 };
@@ -50,7 +61,7 @@ handler.before = async (m, { conn, isAdmin }) => {
     }
 };
 
-handler.help = ['mute', 'unmute'].map(v => v + ' @user');
+handler.help = ['mute ( Reacciona Al Mensaje )', 'unmute ( Reacciona Al Mensaje )'].map(v => v + ' @user');
 handler.tags = ['grupos'];
 handler.command = /^(mute|unmute)$/i;
 handler.group = true;
