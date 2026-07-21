@@ -95,38 +95,10 @@ handler.before = async function (m, { conn, groupMetadata }) {
 │ > *“Lu registró la destitución”* 😿
 ╰─────────────────❒`; break
 
-        case WAMessageStubType.GROUP_PARTICIPANT_ADD:
-            txt = `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🐾 *NUEVO INTEGRANTE*
-│
-│ 💖 *Bienvenido:* @${m.messageStubParameters[0].split('@')[0]}
-│ 🏠 *Grupo:* ${group}
-│ 😼 *Estado:* Ingreso registrado
-│
-│ > *“Ronroneos para el nuevo”* 🐱
-╰─────────────────❒`; break
-
-        case WAMessageStubType.GROUP_PARTICIPANT_LEAVE:
-            txt = `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 💨 *SALIDA REGISTRADA*
-│
-│ 😿 *Se fue:* @${m.messageStubParameters[0].split('@')[0]}
-│ 🏠 *Grupo:* ${group}
-│ 🌫️ *Estado:* Abandonó el grupo
-│
-│ > *“Lu extrañará sus ronroneos”* 🐾
-╰─────────────────❒`; break
-
-        case WAMessageStubType.GROUP_PARTICIPANT_REMOVE:
-            txt = `╭─🐱 *『 𝐁𝐎𝐓 𝐋𝐔 』* 🐱
-│ 🗑️ *EXPULSIÓN EJECUTADA*
-│
-│ 🚮 *Eliminado:* @${m.messageStubParameters[0].split('@')[0]}
-│ 👤 *Por orden de:* ${usuario}
-│ ⚠️ *Causa:* Violación de reglas
-│
-│ > *“Lu protegió al grupo”* 😼
-╰─────────────────❒`; break
+        // ELIMINADOS: WELCOME / BYE / KICK
+        // case WAMessageStubType.GROUP_PARTICIPANT_ADD:
+        // case WAMessageStubType.GROUP_PARTICIPANT_LEAVE:
+        // case WAMessageStubType.GROUP_PARTICIPANT_REMOVE:
     }
 
     if (txt) {
